@@ -1,8 +1,17 @@
-import json
+#!/bin/python3
+
+import json, argparse, sys
+
+try:
+    parser = argparse.ArgumentParser(description='Converter Horusec sonar output format to SonarQube format ', allow_abbrev=True)
+    parser.add_argument('--file', type=str , help='the file to parse', required='True')
+    args = parser.parse_args()
+except:
+    sys.exit(1)
 
 horusec_output = None
 
-with open('./output-sonar.json') as f:
+with open(args.file) as f:
     horusec_output = json.loads(f.read())
 
 def normalize_location(location):
